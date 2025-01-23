@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1, // For top border
     borderColor: '#E0E0E0', // Border color
     backgroundColor: '#FAFAF9', // Background color
+  
   },
   logo: {
     width: 202,
