@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   title: {
     width: 253, // Fixed width in logical pixels
     height: 43, // Fixed height in logical pixels // Full transparency (0px opacity)
-    fontFamily: 'DM Sans', // Specify the font family
+    fontFamily: 'DM_Sans', // Specify the font family
     fontSize: 36, // Font size in pixels
     fontWeight: '500', // Font weight
     lineHeight: 43.2, // Line height
@@ -121,6 +121,7 @@ gap: 0
   },
   checkboxLabel: {
     fontSize: 16,
+    fontFamily: 'DM_Sans', // Specify the font family
   },
   button: {
     width: 305, // Fixed width in logical pixels

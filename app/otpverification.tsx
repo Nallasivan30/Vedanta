@@ -41,7 +41,7 @@ export default function OTPVerification() {
       <Text style={styles.subHeader}>It's really you?</Text>
       <View style={styles.inputContainer}>
       <Text style={styles.instructions}>
-        An authentication code has been sent to        <Text style={styles.highlight}>9876543210</Text>
+        An authentication code has been sent to          <Text style={styles.highlight}>9876543210</Text>
       </Text>
       </View>
 
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     height: 38, // Height in pixels
     gap: 0, // Gap is unused in this case since it's zero
 
-    fontFamily: 'DM Sans', // Ensure you have the font properly loaded in your project
+    fontFamily: 'DM_Sans', // Ensure you have the font properly loaded in your project
     fontSize: 32, // Font size in pixels
     fontWeight: '500', // Font weight
     lineHeight: 38.4, // Line height in pixels
@@ -120,8 +120,8 @@ const styles = StyleSheet.create({
 
     opacity: 0.5, // Opacity equivalent to --TextText-Opacity75
 
-    fontFamily: 'DM Sans', // Ensure the font is loaded in your project
-    fontSize: 18, // Font size in pixels
+    fontFamily: 'DM_Sans', // Ensure the font is loaded in your project
+    fontSize: 12, // Font size in pixels
     fontWeight: '500', // Font weight
     lineHeight: 18, // Line height in pixels
     letterSpacing: 0.02, // Letter spacing in em
@@ -130,8 +130,8 @@ const styles = StyleSheet.create({
     textDecorationLine: 'none',
   },
   highlight: {
-    fontFamily: 'DM Sans', // Ensure you load this font in your project
-    fontSize: 18, // Font size in pixels
+    fontFamily: 'DM_Sans', // Ensure you load this font in your project
+    fontSize: 14, // Font size in pixels
     fontWeight: '600', // Font weight
     lineHeight: 18, // Line height in pixels
     letterSpacing: 0.02, // Letter spacing in em
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     borderColor: 'g', // To ensure other borders are transparent
     borderWidth: 1,
     color: 'gray',
-    fontSize:24,
+    fontSize:22,
     alignItems: 'center',
   },
   resend:{width: '100%',
@@ -168,15 +168,15 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     paddingRight: 0,},
   resendCode: {
-    fontFamily: 'DM Sans', // Ensure the font is available in your project
-    fontSize: 20,
+    fontFamily: 'DM_Sans', // Ensure the font is available in your project
+    fontSize: 14,
     fontWeight: '400',
     lineHeight: 21,
     letterSpacing: 0.02, // React Native uses a number, not `em`
     textAlign: 'center',
   },
   resendButton:{
-    fontFamily: 'DM Sans', // Ensure the font is available in your project
+    fontFamily: 'DM_Sans', // Ensure the font is available in your project
     fontSize: 20,
     fontWeight: '700', // This corresponds to bold text
     lineHeight: 21,
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     color: 'white',
     width: 35, // Fixed width in pixels
     height: 24, // Fixed height in pixels
-    fontFamily: 'DM Sans', // Ensure this font is available in your project
+    fontFamily: 'DM_Sans', // Ensure this font is available in your project
     fontSize: 16,
     fontWeight: '600', // Semi-bold weight in React Native
     lineHeight: 24,
@@ -238,8 +238,8 @@ footerCon:{
 },
   footerText: {
     
-    fontFamily: 'DM Sans',  // Ensure you load the font in your project
-    fontSize: 18,  // Equivalent to 14px
+    fontFamily: 'DM_Sans',  // Ensure you load the font in your project
+    fontSize: 14,  // Equivalent to 14px
     fontWeight: '400',  // Regular weight in React Native
     lineHeight: 21,  // Line height of 21px
     letterSpacing: 0.02,  // React Native uses numeric value directly for letter-spacing
@@ -248,8 +248,8 @@ footerCon:{
     color: '#292927'
   },
   link: {
-    fontFamily: 'DM Sans',  // Ensure you load the font in your project
-    fontSize: 18,  // Equivalent to 14px
+    fontFamily: 'DM_Sans',  // Ensure you load the font in your project
+    fontSize: 14,  // Equivalent to 14px
     fontWeight: '700',  // Bold weight in React Native
     lineHeight: 21,  // Line height of 21px
     letterSpacing: 0.02,  // React Native uses numeric values for letter-spacing
