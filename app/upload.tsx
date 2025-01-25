@@ -3,7 +3,7 @@ import { View, Text, StyleSheet,TextInput ,TouchableOpacity, Image, Alert, Butto
 import { CameraView, CameraType, useCameraPermissions } from "expo-camera"; // Import Camera from expo-camera
 import Icon from "react-native-vector-icons/MaterialIcons"; 
 import Icons from "react-native-vector-icons/Octicons"; 
-
+import { useRouter } from "expo-router";
 import * as DocumentPicker from 'expo-document-picker';
 
 export default function Upload() {
@@ -12,7 +12,10 @@ export default function Upload() {
   const cameraRef = useRef<CameraView>(null); 
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [cameraPermission, requestCameraPermission] = useCameraPermissions(); // Request Camera Permission
+  const [showCamera, setShowCamera] = useState(false); // State to toggle between camera and upload view
   
+  const router = useRouter();
+
   // Request permission when the component mounts
     useEffect(() => {
       if (!cameraPermission?.granted) {
@@ -49,16 +52,21 @@ export default function Upload() {
   // to capture image\
   const handleCapture = async () => {
       try {
+        setShowCamera(true);
         if (cameraRef.current) {
+          
           const photo = await cameraRef.current.takePictureAsync({
             quality: 1, // Adjust quality (0-1 scale)
             base64: true, // Optional, returns base64 image data
             skipProcessing: false, // Optionally skips processing for faster capture
           });
-  
+          setShowCamera(false); 
           // If the photo is successfully captured, update the state
           if (photo?.uri) {
             setCapturedImage(photo.uri);
+            setFileUri(photo.uri); // Use the captured photo URI as the uploaded file
+          setFileName("Captured_Image.jpg"); // Set a default name
+          setShowCamera(false); 
           } else {
             Alert.alert("No photo captured", "Please try again.");
           }
@@ -77,9 +85,16 @@ export default function Upload() {
   // handling btn option
   const handleButtonPress = () => {
     if (fileUri) {
-      // If fileUri is set, it means file was uploaded
       console.log('Uploading the file: ', fileUri);
-      // You can put your file upload logic here
+      Alert.alert("Success", "Uploaded successfully!", [
+        {
+          text: "OK",
+          onPress: () => {
+            // Navigate to the AppointmentBooking page
+            router.push("./appointment-booking");
+          },
+        },
+      ]);    
     } else {
       // If no fileUri, trigger camera capture
       handleCapture();
@@ -97,12 +112,27 @@ export default function Upload() {
           <Text style={styles.descriptionText}>
               Upload your <Text style={styles.span}>Aadhar</Text> card to complete the verification process securely.
           </Text>
-          <View style={styles.uploadContainer}>
-              <TouchableOpacity style={styles.captureIcon} >
-              <Icon name="cloud-upload" style={styles.iconImage} onPress={pickDocument} size={36}  />
+          <View >
+              {showCamera?((capturedImage?(
+                <Image source={{uri: capturedImage}} style={styles.cameraContainer} />
+              ):(
+                <CameraView ref={cameraRef} style={styles.cameraContainer} >
 
-              </TouchableOpacity>
-              <Text style={styles.uploadInstructions}>Capture it Fully visible and clear</Text>
+                </CameraView>
+              ))
+                
+              ):(
+                <View style={styles.uploadContainer} >
+                  <TouchableOpacity style={styles.captureIcon} >
+                    <Icon name="cloud-upload" style={styles.iconImage} onPress={pickDocument} size={36}  />
+
+                    </TouchableOpacity>
+                    <View style={styles.uploadTextContainer}>
+                    <Text style={styles.uploadInstructions}>Drag your file(s) or <Text style={styles.browsetext}>Browse</Text></Text>
+                    <Text style={styles.uploadText}>Only jpg or png</Text>
+                    </View>
+                </View>
+              )}
           </View>
           
           {/* Show the picked document details */}
@@ -196,7 +226,21 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignItems: 'center',
   },
-
+  cameraContainer:{
+    width: "100%", // Fill width (305px in the design translates to full width in RN layout)
+    maxWidth: 305, // Ensures it doesn't exceed 305px if constrained
+    height: 116, // Hug height (React Native automatically adjusts height)
+    maxHeight: 116, // Sets a maximum height of 116px
+    padding: 16, // padding: var(--spacinglg) assumed as 16px
+    gap: 12, // gap: 12px (use in layout as flex spacing or padding between children)
+    borderRadius: 12, // border-radius: var(--radimlg), assumed as 12px
+    borderWidth: 1, 
+    borderColor: "#1A5CFF",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 30,
+    borderStyle: 'dashed'
+  },
   uploadContainer: {
     width: "100%", // Fill width (305px in the design translates to full width in RN layout)
     maxWidth: 305, // Ensures it doesn't exceed 305px if constrained
@@ -224,6 +268,10 @@ const styles = StyleSheet.create({
   iconImage: {
     color:'#1A5CFF'
   },
+  uploadTextContainer:{
+    justifyContent:"center",
+    alignItems:"center"
+  },
   uploadInstructions: {
     fontFamily: "DM_Sans", // Font family
     fontSize: 14, // Font size
@@ -231,6 +279,17 @@ const styles = StyleSheet.create({
     lineHeight: 20, // Line height
     textAlign: "left", // Text alignment
     color: "#98989D",
+  },
+  browsetext:{
+    color:"#1A5CFF",
+  },
+  uploadText:{
+    fontFamily: "DM_Sans", // font-family: DM Sans
+    fontSize: 14,          // font-size: 14px
+    fontWeight: "500",     // font-weight: 500
+    lineHeight: 20,        // line-height: 20px
+    textAlign: "center",   // text-align: center
+    textDecorationStyle: "solid", // Ensures the underline appears solid (React Native doesn't support `text-underline-position` directly)
   },
   uploadedHead:{
     fontSize: 14,

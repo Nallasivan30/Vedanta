@@ -13,4 +13,4 @@ declare module 'expo-document-picker' {
       copyToCacheDirectory?: boolean;
     }): Promise<DocumentPickerResult>;
   }
-  
+  declare module '@react-native-picker/picker';

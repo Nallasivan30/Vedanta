@@ -49,7 +49,7 @@ export default function App() {
   const handleConfirm = () => {
     if (capturedImage) {
       // Proceed with the confirmed image (e.g., upload it or save it)
-      Alert.alert("Image confirmed", "Your image is ready.",[
+      Alert.alert("Image successfully captured", "Get into next step",[
         {
           text: "OK",
           onPress: () => {

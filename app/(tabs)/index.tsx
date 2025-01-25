@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { useFonts } from 'expo-font';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import * as SplashScreen from 'expo-splash-screen';
+
 import { View, Text, TextInput, Image, TouchableOpacity, Button, StyleSheet } from "react-native";
 import { useRouter } from "expo-router"; // Import the useRouter hook for navigation
 
 export default function Verify() {
+
+
+    const colorScheme = useColorScheme();
+    const [loaded] = useFonts({
+    DM_Sans: require('../../assets/fonts/DMSans_18pt-Light.ttf')
+  });
   const [isChecked, setChecked] = useState(false);
   const router = useRouter(); // Initialize the router
   const handleVerifyPress = () => {
@@ -10,6 +20,16 @@ export default function Verify() {
     router.push("/otpverification"); // Modify with the correct path to your screen
   };
   
+
+    useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
+  if (!loaded) {
+    return null;
+  }
   return (
     <View style={styles.container}>
       <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
